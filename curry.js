@@ -14,4 +14,8 @@ var curry = function(fn) {
 		}
 	}
 }
-module.exports = curry
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = curry;
+} else {
+	window.curry = curry
+}

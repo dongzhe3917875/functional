@@ -14,4 +14,8 @@ var compose = function(...args) {
 		}
 	}
 }
-module.exports = compose
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+	module.exports = compose
+} else {
+	window.compose = compose
+}
