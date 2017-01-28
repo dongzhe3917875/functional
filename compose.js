@@ -1,10 +1,15 @@
 // 相当于flowRight 反过来就是 args.shift 就相当于flow
 var compose = function(...args) {
+	var len = args.length
+	var count = 0
 	return function f1(x) {
-		var result = args.pop()(x)
-		if (args.length === 0) {
+		var result, index = (len - count)
+		--index >= 0 && (result = args[index](x))
+		if (index <= 0) {
+			count = 0
 			return result
 		} else {
+			count++
 			return f1.call(null, result)
 		}
 	}

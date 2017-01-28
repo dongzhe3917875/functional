@@ -1,9 +1,11 @@
-var arr = [1,2,3,4,5]
+·   var arr = [1,2,3,4,5]
 // 函数缓存
 var memorized = function(func) {
     memorized.cache = new Map();
     return function(...args) {
-        const key = args[0];
+        // const key = args[0];
+        // 支持多个参数
+        const key = JSON.stringify(args);
         const cache = memorized.cache;
         if (cache.has(key)) {
             return cache.get(key);
