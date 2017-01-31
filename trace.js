@@ -3,4 +3,8 @@ var trace = curry((tag, x) => {
 	console.log(tag, x)
 	return x
 })
-module.exports = trace
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = trace
+} else {
+	window.trace = trace
+}
