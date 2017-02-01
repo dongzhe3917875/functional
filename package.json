@@ -1,0 +1,19 @@
+{
+  "name": "functional",
+  "version": "1.0.0",
+  "description": "",
+  "main": "IO.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongzhe3917875/functional.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dongzhe3917875/functional/issues"
+  },
+  "homepage": "https://github.com/dongzhe3917875/functional#readme"
+}

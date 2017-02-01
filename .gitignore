@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+*.pyc
+WRONG_CODE.py
+node_modules/
+dist/
+.deploy*/
+sftp-config.json
