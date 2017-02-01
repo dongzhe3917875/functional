@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dongzhe3917875/functional/issues"
   },
-  "homepage": "https://github.com/dongzhe3917875/functional#readme"
+  "homepage": "https://github.com/dongzhe3917875/functional#readme",
+  "devDependencies": {
+    "data.task": "^3.1.1"
+  }
 }
