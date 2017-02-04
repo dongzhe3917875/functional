@@ -25,6 +25,13 @@ IO.of = x => new IO(_ => x)
 IO.prototype.map = function(f) {
 	return new IO(compose(f, this.__value))
 }
+IO.prototype.join = function() {
+	return this.__value ? this.__value() : IO.of(null)
+}
+IO.prototype.chain = function(f) {
+	return this.map(f).join()
+}
+var chain = curry((f, frr) => frr.chain(f))
 // console.log(module)
 // io_module:: IO module
 var io_module = IO.of(module)
@@ -43,3 +50,11 @@ console.log(cat('either.js'))
 // new IO(compose(print, _ => fs.readFileSync(fileName, 'utf-8'))) => func
 // func.__value() => new IO(_ => {console.log(fs.readFileSync(fileName, 'utf-8'))}) => func2
 // func2.__value(). ok
+var catChain = compose(chain(print), $)
+// 以下的操作都是把未来的行为封装起来 并没有真正的执行 只有调用的时候才会真正的执行
+// 先map
+// new IO(compose(print, _ => fs.readFileSync(fileName, 'utf-8')))
+// 再join 
+// 此时 compose 已经执行完毕 本来应该返回一个IO new IO(_ => {console.log(fs.readFileSync(fileName, 'utf-8'))
+// 但是我们自动执行了 this.__value() => console.log(fs.readFileSync(fileName, 'utf-8')
+console.log(catChain('either.js').__value())

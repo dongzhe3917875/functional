@@ -19,3 +19,15 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 } else {
 	window.curry = curry
 }
+
+// ES6 写法
+var currySimple = fn => {
+	var limit = fn.length
+	var f1 = null
+	return f1 = (...args) => args.length >= limit ? fn.apply(null, args) : (...args2) => f1.apply(null, args.concat(args2))
+}
+
+// 一行 但是有性能问题 每次都读取一遍fn.length 不能将参数缓存下来
+var currySingle = fn => f1 = (...args) => args.length >= fn.length ? fn.apply(null, args) : (...args2) => f1.apply(null, args.concat(args2))
+// 
+var currySingle = fn => ((limit) => f1 = (...args) => args.length >= limit ? fn.apply(null, args) : (...args2) => f1.apply(null, args.concat(args2)))(fn.length)
