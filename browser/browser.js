@@ -36,6 +36,7 @@ Task.prototype.map = function _map(f) {
     });
   }, cleanup);
 };
+// var getJSON = curry((url, param) => new Task((reject, result) => $.getJSON(url, param, result).fail(reject)))
 // 几乎所有的异步操作都是有副作用的 因为依赖于外部的状态
 // Task有点像IO，可以看出computation就是一个函数 一般包含两项 reject resolve
 // (reject, result) => $.getJSON(url, param, result).fail(reject) 这个fork就是这个函数
@@ -47,7 +48,7 @@ Task.prototype.map = function _map(f) {
 // function(data) 就是resolve 处理的数据就是f(b) 我们在执行fork的时候 本例子的过程如下
 // func = prop('rows')
 // Task(asynchronous).map(func)
-// fork : (dataprocess, errprocess) => $.getJSON(url, param, function(data) {return dataprocess(fprop(data))}).fail(function(err){ return errprocess(err)})
+// fork : (errprocess, dataprocess) => $.getJSON(url, param, function(data) {return dataprocess(fprop(data))}).fail(function(err){ return errprocess(err)})
 // Task(asynchronous).map(func).fork(errprocess, dataprocess)
 // $.getJSON(url, param, function(data) {return dataprocess(fprop(data))}).fail(function(err){ return errprocess(err)})
 

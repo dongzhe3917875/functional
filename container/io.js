@@ -48,13 +48,18 @@ var print = x => new IO(_ => {
 var cat = compose(map(print), $)
 console.log(cat('either.js'))
 // new IO(compose(print, _ => fs.readFileSync(fileName, 'utf-8'))) => func
+
 // func.__value() => new IO(_ => {console.log(fs.readFileSync(fileName, 'utf-8'))}) => func2
+
 // func2.__value(). ok
 var catChain = compose(chain(print), $)
+// catChain('either.js')
 // 以下的操作都是把未来的行为封装起来 并没有真正的执行 只有调用的时候才会真正的执行
 // 先map
 // new IO(compose(print, _ => fs.readFileSync(fileName, 'utf-8')))
-// 再join 
-// 此时 compose 已经执行完毕 本来应该返回一个IO new IO(_ => {console.log(fs.readFileSync(fileName, 'utf-8'))
-// 但是我们自动执行了 this.__value() => console.log(fs.readFileSync(fileName, 'utf-8')
+// 再join => compose(print, _ => fs.readFileSync(fileName, 'utf-8'))()
+// => new IO(_ => console.log(fs.readFileSync(fileName, 'utf-8')))
+
+
 console.log(catChain('either.js').__value())
+
