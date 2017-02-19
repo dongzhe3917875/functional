@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    body,div,ul,li{
+      padding: 0;
+      margin: 0;
+      font-size: 0;
+      letter-spacing: -4px;
+      position: relative;
+    }
+    div.all{
+      width: 400px;
+      height: 12000px;
+      margin: 0 auto;
+      border: 1px solid black;
+      /*overflow: hidden;*/
+    }
+      div span.totop{
+        display: block;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        position: fixed;
+        text-align: center;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 20px;
+        letter-spacing: 0;
+        left: 50%;
+        bottom: 50px;
+        margin-left: -30px;
+      }
+  </style>
+</head>
+<body>
+  <div class="all">
+    <span class="totop">顶部</span>
+  </div>
+
+  <script type="text/javascript">
+    var spanTotop= document.querySelector("span.totop");
+
+    var itimerAnother,
+    iPosition;
+    window.onscroll= function(){
+      iPosition= document.documentElement.scrollTop|| document.body.scrollTop;
+      // console.log(iPosition);
+    }
+    var arr = []
+    spanTotop.onmousedown= function(){
+      iPosition= document.documentElement.scrollTop|| document.body.scrollTop;
+      itimerAnother= setInterval(function(){
+        console.log(itimerAnother) 
+        iPosition= iPosition- Math.ceil(iPosition/ 10);
+        document.documentElement.scrollTop= iPosition;
+        document.body.scrollTop= iPosition;
+        if(iPosition<= 0){
+          console.log(itimerAnother + 'haha')
+          arr.forEach(function(ele) {
+            clearInterval(ele)
+          })
+        }
+      },10);
+      arr.push(itimerAnother)
+    }
+  </script>
+</body>
+</html>
